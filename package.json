@@ -1,0 +1,39 @@
+{
+    "name": "g-rent-backend-api",
+    "version": "1.0.0",
+    "description": "Backend API for managing G-rent workflows such as rent management, item management, product management, user management etc.",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "blob": "^0.1.0",
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "crypto": "^1.0.1",
+        "crypto-js": "^4.0.0",
+        "dotenv": "^10.0.0",
+        "ejs": "^3.1.5",
+        "express": "^4.17.1",
+        "fluent-ffmpeg": "^2.1.2",
+        "mysql": "^2.18.1",
+        "nodemon": "^2.0.9",
+        "ssl-root-cas": "^1.3.1",
+        "uuid": "^8.3.2",
+        "uuid-apikey": "^1.5.3"
+    },
+    "devDependencies": {
+        "got": "^11.3.0",
+        "tape": "^4.7.0"
+    },
+    "keywords": [
+        "data",
+        "g-rent",
+        "kirayepe",
+        "api"
+    ],
+    "author": "Swaroop C",
+    "license": "ISC"
+}
