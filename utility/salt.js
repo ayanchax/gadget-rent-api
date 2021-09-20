@@ -1,24 +1,20 @@
 // Nodejs encryption with CTR
-const crypto = require("crypto");
-const algorithm = "aes-256-cbc";
-const key = crypto.randomBytes(32);
-const iv = crypto.randomBytes(16);
+const AES = require("crypto-js/aes");
+const Utf8 = require("crypto-js/enc-utf8")
+const passphrase = "bb5dc8842ca31d4603d6aa11448d1654";
 
 function encrypt(text) {
-    let cipher = crypto.createCipheriv("aes-256-cbc", Buffer.from(key), iv);
-    let encrypted = cipher.update(text);
-    encrypted = Buffer.concat([encrypted, cipher.final()]);
-  //  return { iv: iv.toString("hex"), encryptedData: encrypted.toString("hex") };
-  return encrypted.toString("hex");
+  return AES.encrypt(text, passphrase).toString();
 }
 
-function decrypt(text) {
-    let iv = Buffer.from(text.iv, "hex");
-    let encryptedText = Buffer.from(text.encryptedData, "hex");
-    let decipher = crypto.createDecipheriv("aes-256-cbc", Buffer.from(key), iv);
-    let decrypted = decipher.update(encryptedText);
-    decrypted = Buffer.concat([decrypted, decipher.final()]);
-    return decrypted.toString();
+function decrypt(ciphertext) {
+  const bytes = AES.decrypt(ciphertext, passphrase);
+  const originalText = bytes.toString(Utf8);
+  return originalText;
 }
-
-module.exports = { decrypt, encrypt };
+const isValidPassword=(pwd)=>{
+  if(!pwd) return false
+  var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+  return re.test(pwd);
+}
+module.exports = { decrypt, encrypt,isValidPassword };

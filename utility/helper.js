@@ -54,11 +54,32 @@ function cleanWarning(error) {
     ""
   );
 }
+const isValidEmail=(email)=>{
+  if(!email) return false;
+  const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  return re.test(email);
+}
 
+const isValidZIP=(zip)=>{
+  if(!zip) return false;
+  if(isNaN(zip)) return false;
+  if(zip.length===6) return true;
+  return false
+}
+
+const isValidPhoneNumber=(phone)=>{
+  if(!phone) return false;
+  if(isNaN(phone)) return false;
+  if(phone.length===10) return true;
+  return false
+}
 module.exports = {
   format,
   addQuotes,
   isBoolean,
   isProdMode,
-  getID
+  getID,
+  isValidEmail,
+  isValidZIP,
+  isValidPhoneNumber
 };
