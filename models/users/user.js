@@ -39,6 +39,11 @@ class User {
     this.findUserCountByIdQuery = null;
     this.generateUserVerificationLink = null;
   }
+
+  getUserDeleteQuery(){
+    return "DELETE FROM gadget_rent.users where objid = " +
+    helper.addQuotes(this.objectid)
+  }
   getGenerateUserVerificationLink() {
     return (
       "UPDATE gadget_rent.users SET " +
@@ -55,6 +60,17 @@ class User {
       "UPDATE gadget_rent.users SET " +
       " isAccountVerified =" +
       this.isAccountVerified +
+      "," +
+      " lastModifiedTime=CURRENT_TIMESTAMP where objid = " +
+      helper.addQuotes(this.objectid)
+    );
+  }
+
+  getUpdateAccountActivationFlagQuery() {
+    return (
+      "UPDATE gadget_rent.users SET " +
+      " isActive =" +
+      this.isActive +
       "," +
       " lastModifiedTime=CURRENT_TIMESTAMP where objid = " +
       helper.addQuotes(this.objectid)
@@ -78,6 +94,13 @@ class User {
     );
   }
 
+  getFindInActiveUserCountByIdQuery() {
+    return (
+      "SELECT count(objid) as dataCount FROM gadget_rent.users where objid=" +
+      helper.addQuotes(this.objectid) +" and isActive=0"
+    );
+  }
+
   getActiveUserByIdQuery() {
     return (
       "SELECT userid, name, st_address_ln1, st_address_ln2, st_address_ln3,city,pincode,state,country,mobile_number,isAccountVerified,accountVerificationLink,lastModifiedTime FROM gadget_rent.users where objid=" +
@@ -85,18 +108,52 @@ class User {
     );
   }
 
+  getInActiveUserByIdQuery() {
+    return (
+      "SELECT userid, name, st_address_ln1, st_address_ln2, st_address_ln3,city,pincode,state,country,mobile_number,isAccountVerified,accountVerificationLink,lastModifiedTime FROM gadget_rent.users where objid=" +
+      helper.addQuotes(this.objectid) +" and isActive=0"
+    );
+  }
+
+  getAllUsersQuery() {
+    return (
+      "SELECT userid, name, st_address_ln1, st_address_ln2, st_address_ln3,city,pincode,state,country,mobile_number,isAccountVerified,accountVerificationLink,lastModifiedTime FROM gadget_rent.users"
+    );
+  }
+
+  getAllActiveUsersQuery() {
+    return (
+      "SELECT userid, name, st_address_ln1, st_address_ln2, st_address_ln3,city,pincode,state,country,mobile_number,isAccountVerified,accountVerificationLink,lastModifiedTime FROM gadget_rent.users where isActive=1"
+    );
+  }
+
+  getAllInActiveUsersQuery() {
+    return (
+      "SELECT userid, name, st_address_ln1, st_address_ln2, st_address_ln3,city,pincode,state,country,mobile_number,isAccountVerified,accountVerificationLink,lastModifiedTime FROM gadget_rent.users where isActive=0"
+    );
+  }
+
+
+
   getFindUserPasswordByIdQuery() {
     return (
       "SELECT count(objid) as dataCount, password FROM gadget_rent.users where objid=" +
-      helper.addQuotes(this.objectid)
+      helper.addQuotes(this.objectid) +" and isActive=1"
     );
   }
 
   getUserAccountVerificationLinkByIdQuery() {
     return (
       "SELECT count(objid) as dataCount, accountVerificationLink,isAccountVerified FROM gadget_rent.users where objid=" +
-      helper.addQuotes(this.objectid)
+      helper.addQuotes(this.objectid) +" and isActive=1"
     );
+  }
+
+  getUserAccountActivationStatusByIdQuery() {
+    return (
+      "SELECT count(objid) as dataCount,isActive FROM gadget_rent.users where objid=" +
+      helper.addQuotes(this.objectid) 
+    )
   }
 
   getUpdateUserPersonalDetailsQuery() {

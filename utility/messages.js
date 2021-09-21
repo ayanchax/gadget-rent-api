@@ -10,11 +10,16 @@ const api_messages = {
     USER:{
         created:"User created successfully.",
         updated:"User updated successfully.",
+        deleted:"User deleted successfully.",
         already_verified:"User already verified",
         account_verified:"User account verified successfully.",
+        already_activated:"User already activated",
+        account_activated:"User account activated successfully.",
+        already_deactivated:"User already Deactivated.",
+        account_deactivated:"User account Deactivated successfully.",
         password_changed:"User password changed successfully.",
-        password_incorrect:"Old password entered is incorrect.",
-        password_change_error:"Password could not be changed. Possible reason could be either the user does not exist or the old password you entered is incorrect. Please contact support.",
+        old_password_incorrect:"Old password entered is incorrect.",
+        password_change_error:"Password could not be changed. Possible reason could be either the user does not exist or is deactivated or the old password you entered is incorrect. Please contact support.",
         verification_link_generated:"User verification link generated successfully.",
         verification_link_exists:"User verification link already exists.",
         no_verification_link:"No user verification link generated. Please contact support for account verification link.",
@@ -26,8 +31,15 @@ const api_messages = {
         object_missing_update_error:"Provide a valid object identifier to update user details.",
         not_found_error:"No User found to update.",
         no_user_found:"No User found.",
+        no_users_found:"No Users found.",
+        no_user_found_to_delete:"No User found to delete.",
+        no_active_users_found:"No Active Users found.",
+        no_inactive_users_found:"No Inactive Users found.",
+        user_not_active:"User is not active",
+        user_not_inactive:"User is not inactive",
+        cannot_delete_active_user:"User is active, you cannot delete it. To remove a user permanently, you need to deactivate the user first. For more information, please refer to API docs or contact support.",
         required_fields_for_password_change_error:"Required fields for password change missing. Requird fields are oldPassword,newPassword,confirmNewPassword.",
-        password_mismatch_error:"New password do not match with the confirm password."
+        password_mismatch_error:"New password does not match with the confirm password."
         
     }
 };
