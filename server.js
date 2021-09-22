@@ -4,6 +4,8 @@ const cors = require("cors");
 const path = require("path");
 const router = require("./routes/route");
 const userServiceRouter = require("./services/user/user-service");
+const authenticationServiceRouter = require("./services/user/authentication/user-authentication-service");
+const authorizationServiceRouter = require("./services/user/authorization/user-authorization-service");
 const app = express();
 const dotenv = require("dotenv");
 dotenv.config();
@@ -20,6 +22,8 @@ app.use(express.static(path.join(__dirname, "public")));
 //3 api/router setup
 app.use("/api/"+process.env.VERSION, router);
 app.use("/api/"+process.env.VERSION+"/user", userServiceRouter);
+app.use("/api/"+process.env.VERSION+"/authenticate", authenticationServiceRouter);
+app.use("/api/"+process.env.VERSION+"/authorize", authorizationServiceRouter);
 
 // 4 Listening to the express server.
 // this method runs at the entry point of starting the node js applications

@@ -39,7 +39,14 @@ const api_messages = {
         user_not_inactive:"User is not inactive",
         cannot_delete_active_user:"User is active, you cannot delete it. To remove a user permanently, you need to deactivate the user first. For more information, please refer to API docs or contact support.",
         required_fields_for_password_change_error:"Required fields for password change missing. Requird fields are oldPassword,newPassword,confirmNewPassword.",
-        password_mismatch_error:"New password does not match with the confirm password."
+        password_mismatch_error:"New password does not match with the confirm password.",
+        authentication_error:"Authentication error",
+        authentication_error_message:"Incorrect email and/or password.",
+        authentication_done:"User is authenticated successfully.",
+        authorization_error:"Authorization error",
+        authorization_done:"User is authorized successfully.",
+        unauthorization_error:"Un-Authorization error",
+        unauthorization_done:"User is unauthorized successfully.",
         
     }
 };

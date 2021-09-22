@@ -64,7 +64,7 @@ userServiceRouter.post("/add", (req, res) => {
   var _user = new user(
     objectID,
     userid,
-    passwordSalter.encrypt(pwd),
+    passwordSalter.encrypt(pwd,objectID),
     req.body?.thirdPartySignIn ? req.body?.thirdPartySignIn : "0",
     req.body?.isActive ? req.body?.isActive : "1",
     name,
@@ -488,7 +488,7 @@ userServiceRouter.patch("/change/password/:userid", (req, res) => {
           if (result[0].dataCount === 1) {
             let existingEncryptedPassword = result[0].password;
             let decryptedExistingPassword = passwordSalter.decrypt(
-              existingEncryptedPassword
+              existingEncryptedPassword,objectid
             );
             if (decryptedExistingPassword !== oldPassword) {
               res.status(404).json({
@@ -497,7 +497,7 @@ userServiceRouter.patch("/change/password/:userid", (req, res) => {
               });
               return;
             }
-            _user.password = passwordSalter.encrypt(newPassword);
+            _user.password = passwordSalter.encrypt(newPassword, objectid);
             executor
               .executeQuery(_user.getUpdatePasswordQuery(), object)
               .then(() => {
